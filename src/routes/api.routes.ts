@@ -125,7 +125,6 @@ router.post('/bank/fund-account', async (req: Request, res: Response) => {
           ifsc,
           account_number: accountNumber
         },
-        notes: { description }
       }),
     })
     const data = await r.json() as any
