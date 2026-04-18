@@ -12,6 +12,14 @@ const router = Router()
 router.get("/route-test", (_, res) => {
   res.json({ ok: true, msg: "new routes file loaded" });
 });
+router.get('/debug/keys', (req, res) => {
+  const keyId = process.env.RAZORPAY_KEY_ID || ''
+  res.json({
+    keyIdSet: !!keyId,
+    keyIdPrefix: keyId.slice(0, 12) + '...',   // shows first 12 chars safely
+    secretSet: !!process.env.RAZORPAY_KEY_SECRET,
+  })
+})
 
 function zodError(res: Response, err: ZodError) {
   return res.status(400).json({
