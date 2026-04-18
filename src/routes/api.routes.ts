@@ -9,6 +9,10 @@ import { v4 as uuidv4 } from 'uuid'
 
 const router = Router()
 
+router.get("/route-test", (_, res) => {
+  res.json({ ok: true, msg: "new routes file loaded" });
+});
+
 function zodError(res: Response, err: ZodError) {
   return res.status(400).json({
     success: false,
