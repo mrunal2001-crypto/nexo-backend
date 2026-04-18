@@ -111,7 +111,7 @@ router.post('/bank/fund-account', async (req: Request, res: Response) => {
   }
 
   try {
-    const r = await fetch('https://api.razorpay.com/v1/fund-account', {
+    const r = await fetch('https://api.razorpay.com/v1/fund_accounts', {
       method: 'POST',
       headers: {
         'Authorization': 'Basic ' + Buffer.from(`${KEY_ID}:${KEY_SECRET}`).toString('base64'),
