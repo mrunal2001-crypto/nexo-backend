@@ -1,3 +1,13 @@
+
+declare global {
+  interface ImportMeta {
+    env: {
+      VITE_API_BASE: string
+      RAZORPAY_ACCOUNT_NUMBER?: string
+    }
+  }
+}
+
 type BankMode = 'NEFT' | 'IMPS' | 'RTGS'
 
 type ApiResult<T = any> = {
@@ -6,14 +16,16 @@ type ApiResult<T = any> = {
   error?: string
 }
 
-const RAZORPAY_ACCOUNT_NUMBER = process.env.RAZORPAY_ACCOUNT_NUMBER || ''
+const RAZORPAY_ACCOUNT_NUMBER = import.meta.env.RAZORPAY_ACCOUNT_NUMBER || ''
+
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3001'
 
 function shortId(): string {
   return Math.random().toString(36).substr(2, 9)
 }
 
 async function razorpayFetch(endpoint: string, body: any): Promise<any> {
-  const response = await fetch(`http://localhost:3001/api${endpoint}`, {
+  const response = await fetch(`${API_BASE}/api${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
